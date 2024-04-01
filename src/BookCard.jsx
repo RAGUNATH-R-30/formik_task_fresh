@@ -4,23 +4,27 @@ import { CiEdit } from "react-icons/ci";
 import { FaBook } from "react-icons/fa";
 import { FaPen } from "react-icons/fa";
 import Bookmodal from "./editbookmodal";
+import DeleteBookModal from "./DeleteBookModal";
 function BookCard({content}) {
 
   const [modalstate,setshowmodal]=useState(false);
 
+  const [deletemodal, setdeletemodal] = useState(false);
   let modalclose = (bool) => {
     setshowmodal(bool);
   };
-
+  let deletemodalclose = (bool) => {
+    setdeletemodal(bool);
+  };
   return (
     <>
     <div className="col-lg-12">
-      <div className="card mb-3" style={{ maxWidth: "100%",height:152 }}>
+      <div className="card mb-3" style={{ maxWidth: "100%", }}>
         <div className="row g-0">
           <div className="col-md-2">
             <div
               style={{
-                height: 150,
+                height: 211,
                 width: 150,
                 display: "flex",
                 alignItems: "center",
@@ -53,12 +57,22 @@ function BookCard({content}) {
                   {`ISBN Number: ${content.isbnnumber}`}
                 </small>
               </p>
+              <button type="button"
+                className="btn btn-outline-danger"
+                onClick={() => {
+                  setdeletemodal(true);
+                }}
+
+                >Delete</button>
             </div>
           </div>
         </div>
       </div>
     </div>
     {modalstate&&<Bookmodal content={content} modalclose={modalclose}/>}
+    {deletemodal && (
+        <DeleteBookModal content={content} deletemodalclose={deletemodalclose} />
+      )}
     </>
   );
 }

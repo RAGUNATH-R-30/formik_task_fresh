@@ -1,13 +1,18 @@
 import { useFormik } from "formik";
 import React, { useState } from "react";
 import Authormodal from "./editauthormodal";
+import DeleteAuthorModal from "./DeleteAuthorModal";
 
 function AuthorCard({ content }) {
 
   const [modalstate,setshowmodal]=useState(false);
+  const [deletemodal, setdeletemodal] = useState(false);
 
   let modalclose = (bool) => {
     setshowmodal(bool);
+  };
+  let deletemodalclose = (bool) => {
+    setdeletemodal(bool);
   };
   // console.log(content)
   const formik =useFormik({
@@ -49,13 +54,21 @@ function AuthorCard({ content }) {
             </div>
             <div className="col">
             <button type="button"
-                className="btn btn-outline-danger">Delete</button>
+                className="btn btn-outline-danger"
+                onClick={() => {
+                  setdeletemodal(true);
+                }}
+
+                >Delete</button>
             </div>
           </div>
           
         </div>
       </div>
       {modalstate&&<Authormodal content={content} modalclose={modalclose}/>}
+      {deletemodal && (
+        <DeleteAuthorModal content={content} deletemodalclose={deletemodalclose} />
+      )}
     </div>
     
     

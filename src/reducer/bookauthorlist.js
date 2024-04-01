@@ -54,8 +54,23 @@ export const bookauthorslice = createSlice({
       }
       return state;
     },
+
+    deleteauthor: (state, action) => {
+        const newlist = state.authorslist.filter(
+          (item) => item.id !== action.payload.id
+        );
+        state.authorslist = newlist;
+        return state;
+      },
+      deletebook: (state, action) => {
+        const newlist = state.booklist.filter(
+          (item) => item.id !== action.payload.id
+        );
+        state.booklist = newlist;
+        return state;
+      },
   },
 });
 
-export const { setbooks, setauthors, addauthor, addbooks, editbook ,editauthor} =
+export const { setbooks, setauthors, addauthor, addbooks, editbook ,editauthor,deleteauthor,deletebook} =
   bookauthorslice.actions;

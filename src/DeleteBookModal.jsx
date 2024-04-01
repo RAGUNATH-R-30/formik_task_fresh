@@ -1,0 +1,74 @@
+import React from 'react'
+import { deletebook } from './reducer/bookauthorlist';
+import { useDispatch } from 'react-redux';
+import axios from 'axios';
+
+function DeleteBookModal({content,deletemodalclose}) {
+    const dispatch = useDispatch();
+    let deletebookapi = async (id) => {
+        try {
+          const deleteuserrequest = await axios.delete(
+            `https://6605376c2ca9478ea17fb6d1.mockapi.io/books/${id}`
+          );
+        } catch (error) {
+          console.log(error);
+        }
+      };
+ 
+    return (
+        <div
+          className="modal fade show"
+          id="exampleModal"
+          tabIndex="-1"
+          aria-labelledby="exampleModalLabel"
+          aria-hidden="true"
+          style={{ display: "block" }}
+        >
+          <div className="modal-dialog">
+            <div className="modal-content">
+              <div className="modal-header">
+                <h1 className="modal-title fs-5" id="exampleModalLabel">
+                  Delete User
+                </h1>
+                <button
+                  type="button"
+                  className="btn-close"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
+                  onClick={() => {
+                    deletemodalclose(false);
+                  }}
+                ></button>
+              </div>
+              <div className="modal-body">Are you sure.You want to delete?</div>
+              <div className="modal-footer">
+                <button
+                  type="button"
+                  className="btn btn-primary btn-sm"
+                  style={{ backgroundColor: "#66C6BA", border: "none" }}
+                  data-bs-dismiss="modal"
+                  onClick={() => {
+                    deletemodalclose(false);
+                  }}
+                >
+                  No
+                </button>
+                <button
+                  type="button"
+                  className="btn btn-outline-danger btn-sm"
+                  onClick={() => {
+                    deletebookapi(content.id);
+                    dispatch(deletebook(content));
+                    deletemodalclose(false);
+                  }}
+                >
+                  yes
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      );
+}
+
+export default DeleteBookModal
