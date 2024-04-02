@@ -121,7 +121,7 @@ function Authormodal({ content, modalclose }) {
                       Birthdate
                     </label>
                     <input
-                      type="text"
+                      type="date"
                       className="form-control"
                       id="exampleInputEmail1"
                       aria-describedby="emailHelp"
@@ -151,7 +151,7 @@ function Authormodal({ content, modalclose }) {
                   </div>
 
                   {formik.getFieldMeta("biography").error&&formik.getFieldMeta("biography").touched&&(<span style={{color:"red"}}>{formik.getFieldMeta("biography").error}</span>)}
-                  
+
                 </div>
               </div>
               <div className="modal-footer">

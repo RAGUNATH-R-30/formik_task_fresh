@@ -159,7 +159,7 @@ function Bookmodal({ content, modalclose }) {
                     Publication date
                   </label>
                   <input
-                    type="text"
+                    type="date"
                     className="form-control"
                     id="exampleInputPassword1"
                     name="publicationdate"

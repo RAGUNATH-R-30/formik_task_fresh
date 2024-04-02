@@ -126,7 +126,7 @@ function Createbook({modalclose}) {
             Publication Date
           </label>
           <input
-            type="text"
+            type="date"
             className="form-control"
             id="exampleInputPassword1"
             name='publicationdate'

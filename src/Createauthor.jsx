@@ -31,6 +31,9 @@ function Createauthor() {
             if(values.biography.length<3){
               error.biography = "Enter biography greater than 3."
             }
+            if(values.biography.length>163){
+              error.biography = "Characters Does not exceed 163."
+            }
             if(values.birthdate==0){
               error.birthdate = "Enter the Date Of Birth."
             }

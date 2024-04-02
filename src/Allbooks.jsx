@@ -3,7 +3,9 @@ import BookCard from './BookCard'
 
 function Allbooks({content}) {
   return (
-    <div className="col-lg-8 mt-3">
+    <>
+  <h3>All Books</h3>
+<div className="col-lg-8 mt-3">
         <div className="row">
             {
                 content.map((item,index)=>{
@@ -13,6 +15,8 @@ function Allbooks({content}) {
                 
         </div>
     </div>
+    </>
+    
   )
 }
 

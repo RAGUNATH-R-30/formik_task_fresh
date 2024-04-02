@@ -26,8 +26,8 @@ function AuthorCard({ content }) {
   })
   return (
  
-    <div className="col-lg-3 col-md-4">
-      <div className="card mt-3 " style={{ width: 300,height:400  }}>
+    <div className="col-lg-3 col-md-4 col-sm-6">
+      <div className="card mt-3 ms-2" style={{ }}>
         <div className="card-body">
           <div className="row ">
             <div className="col ">
@@ -45,7 +45,12 @@ function AuthorCard({ content }) {
           </div>
           <h5 className="card-title">{`${content.name}`}</h5>
           <span className="card-subtitle mb-2 text-body-secondary" style={{fontSize:15}}>{`${content.birthdate}`}</span>
+                <hr />
+          <div style={{}}>
+
           <p className="card-text">{`${content.biography}`}</p>
+          </div>
+          <hr />
           <div className="row">
             <div className="col">
             <button type="submit"

@@ -46,7 +46,7 @@ export const bookauthorslice = createSlice({
     editauthor: (state, action) => {
       const updatedlist = action.payload;
         console.log("payload",action.payload)
-      let index = state.booklist.findIndex(
+      let index = state.authorslist.findIndex(
         (author) => author.id === updatedlist.id
       );
       if (index != -1) {
