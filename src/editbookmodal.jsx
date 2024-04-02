@@ -7,13 +7,6 @@ import { editbook } from './reducer/bookauthorlist'
 
 function Bookmodal({ content, modalclose }) {
   //states
-//   const [id, setid] = useState(content.id);
-//   const [name, setname] = useState(content.name);
-//   const [email, setemail] = useState(content.email);
-//   const [phonenumber, setphonenumber] = useState(content.phonenumber);
-//   const [address, setaddress] = useState(content.address);
-//   const [websiteurl, setwebsiteurl] = useState(content.website);
-//   const [companyname, setcompanyname] = useState(content.company);
   const [showmodal, setshowmodal] = useState(true);
 
   const dispatch = useDispatch();
@@ -46,6 +39,29 @@ function Bookmodal({ content, modalclose }) {
             isbnnumber:content.isbnnumber,
             publicationdate:content.publicationdate,
             avatar:content.avatar   
+        },
+        validate:(values)=>{
+          console.log(values)
+          let error = {};
+          if(values.bookname.length == 0){
+            error.bookname = "Please Enter BookName."
+          }
+          if(values.bookname.length<3){
+            error.bookname = "Enter BookName Greater Than Three."
+          }
+          if(values.authorname.length == 0){
+            error.authorname = "Please Enter AuthorName"
+          }
+          if(values.authorname.length<3){
+            error.authorname = "Enter AuthorName Greater Than Three."
+          }
+          if(values.isbnnumber.length<13){
+            error.isbnnumber = "Enter 13 Digit ISBN Number."
+          }
+          if(values.publicationdate.length == 0){
+            error.publicationdate = "Enter the Publication Date."
+          }
+          return error;
         },
         onSubmit:(values)=>{
             console.log("**********************")
@@ -103,6 +119,8 @@ function Bookmodal({ content, modalclose }) {
                   />
                 </div>
 
+                {formik.getFieldMeta("bookname").error&&formik.getFieldMeta("bookname").touched&&(<span style={{color:"red"}}>{formik.getFieldMeta("bookname").error}</span>)}
+
                 <div className="">
                   <label htmlFor="exampleInputEmail1" className="form-label">
                     Author Name
@@ -118,6 +136,8 @@ function Bookmodal({ content, modalclose }) {
                   />
                 </div>
 
+                {formik.getFieldMeta("authorname").error&&formik.getFieldMeta("authorname").touched&&(<span style={{color:"red"}}>{formik.getFieldMeta("authorname").error}</span>)}
+
                 <div className="">
                   <label htmlFor="exampleInputPassword1" className="form-label">
                     ISBN Number
@@ -131,6 +151,8 @@ function Bookmodal({ content, modalclose }) {
                     value={formik.values.isbnnumber}
                   />
                 </div>
+
+                {formik.getFieldMeta("isbnnumber").error&&formik.getFieldMeta("isbnnumber").touched&&(<span style={{color:"red"}}>{formik.getFieldMeta("isbnnumber").error}</span>)}
 
                 <div className="">
                   <label htmlFor="exampleInputPassword1" className="form-label">
@@ -146,6 +168,8 @@ function Bookmodal({ content, modalclose }) {
                   />
                 </div>
                 
+                {formik.getFieldMeta("publicationdate").error&&formik.getFieldMeta("publicationdate").touched&&(<span style={{color:"red"}}>{formik.getFieldMeta("publicationdate").error}</span>)}
+
               </div>
             </div>
             <div className="modal-footer">

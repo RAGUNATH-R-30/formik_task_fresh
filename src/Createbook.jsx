@@ -3,18 +3,43 @@ import { useFormik } from 'formik'
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { addbooks } from './reducer/bookauthorlist'
+import { Link, useNavigate } from 'react-router-dom'
+
 
 function Createbook({modalclose}) {
 
 
   const dispatch =useDispatch()
-
+  const navigate = useNavigate();
   const formik = useFormik({
     initialValues:{
       bookname:"",
       authorname:"",
       isbnnumber:"",
       publicationdate:""
+    },
+    validate:(values)=>{
+      console.log(values.publicationdate)
+      let error = {};
+      if(values.bookname.length==0){
+        error.bookname = "Enter the BookName"
+      }
+      if(values.bookname.length<3){
+        error.bookname = "Enter Bookname greater than three."
+      }
+      if(values.authorname ==""){
+        error.authorname = "Enter the AuthorName"
+      }
+      if(values.authorname.length<3){
+        error.authorname = "Enter AuthorName greater than three."
+      }
+      if(values.isbnnumber.length<13){
+        error.isbnnumber = "Enter 13 digit ISBN Number."
+      }
+      if(values.publicationdate.length==0){
+        error.publicationdate = "Enter the Publication Date."
+      }
+      return error;
     },
     onSubmit:(values)=>{
       console.log(values)
@@ -36,6 +61,7 @@ function Createbook({modalclose}) {
           publicationdate:values.publicationdate
         })
       )
+      navigate("/")
 
     } catch (error) {
       console.log(error)
@@ -62,7 +88,7 @@ function Createbook({modalclose}) {
             onChange={formik.handleChange}
           />
         </div>
-
+        {formik.getFieldMeta("bookname").error&&formik.getFieldMeta("bookname").touched&&(<span style={{color:"red"}}>{formik.getFieldMeta("bookname").error}</span>)}
         <div className="mb-2">
           <label htmlFor="exampleInputEmail1" className="form-label">
             Author Name
@@ -78,6 +104,8 @@ function Createbook({modalclose}) {
           />
         </div>
 
+        {formik.getFieldMeta("authorname").error&&formik.getFieldMeta("authorname").touched&&(<span style={{color:"red"}}>{formik.getFieldMeta("authorname").error}</span>)}
+
         <div className="mb-2">
           <label htmlFor="exampleInputPassword1" className="form-label">
             ISBN Number
@@ -91,6 +119,7 @@ function Createbook({modalclose}) {
             onChange={formik.handleChange}
           />
         </div>
+        {formik.getFieldMeta("isbnnumber").error&&formik.getFieldMeta("isbnnumber").touched&&(<span style={{color:"red"}}>{formik.getFieldMeta("isbnnumber").error}</span>)}
 
         <div className="mb-2">
           <label htmlFor="exampleInputPassword1" className="form-label">
@@ -105,9 +134,10 @@ function Createbook({modalclose}) {
             onChange={formik.handleChange}
           />
         </div>
-
+        {formik.getFieldMeta("publicationdate").error&&formik.getFieldMeta("publicationdate").touched&&(<span style={{color:"red"}}>{formik.getFieldMeta("publicationdate").error}</span>)}
         <div className="row ">
           <div className="col">
+       
             <button
               type="submit"
               className="btn btn-primary "
@@ -116,6 +146,8 @@ function Createbook({modalclose}) {
             >
               Submit
             </button>
+       
+            
           </div>
         </div>
       </div>

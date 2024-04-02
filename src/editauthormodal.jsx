@@ -7,13 +7,6 @@ import { editauthor, editbook } from "./reducer/bookauthorlist";
 function Authormodal({ content, modalclose }) {
     console.log("content",content)
   //states
-  //   const [id, setid] = useState(content.id);
-  //   const [name, setname] = useState(content.name);
-  //   const [email, setemail] = useState(content.email);
-  //   const [phonenumber, setphonenumber] = useState(content.phonenumber);
-  //   const [address, setaddress] = useState(content.address);
-  //   const [websiteurl, setwebsiteurl] = useState(content.website);
-  //   const [companyname, setcompanyname] = useState(content.company);
   const [showmodal, setshowmodal] = useState(true);
 
   const dispatch = useDispatch();
@@ -47,6 +40,26 @@ function Authormodal({ content, modalclose }) {
       birthdate: content.birthdate,
       biography: content.biography,
       avatar: content.avatar,
+    },
+    validate:(values)=>{
+      console.log(values)
+      let error = {}
+      if(values.name.length==0){
+        error.name = "Enter AuthorName"
+      }
+      if(values.name.length<3){
+        error.name = "Enter Name greater than 3."
+      }
+      if(values.birthdate.length==0){
+        error.birthdate = "Enter Birthdate"
+      }
+      if(values.biography.length ==0){
+        error.biography = "Enter Biography"
+      }
+      if(values.biography.length<3){
+        error.biography = "Enter Biography greater than 3 letters."
+      }
+      return error;
     },
     onSubmit: (values) => {
       console.log(values);
@@ -101,6 +114,8 @@ function Authormodal({ content, modalclose }) {
                     />
                   </div>
 
+                  {formik.getFieldMeta("name").error&&formik.getFieldMeta("name").touched&&(<span style={{color:"red"}}>{formik.getFieldMeta("name").error}</span>)}
+
                   <div className="">
                     <label htmlFor="exampleInputEmail1" className="form-label">
                       Birthdate
@@ -115,6 +130,8 @@ function Authormodal({ content, modalclose }) {
                       value={formik.values.birthdate}
                     />
                   </div>
+
+                  {formik.getFieldMeta("birthdate").error&&formik.getFieldMeta("birthdate").touched&&(<span style={{color:"red"}}>{formik.getFieldMeta("birthdate").error}</span>)}
 
                   <div className="">
                     <label
@@ -132,6 +149,9 @@ function Authormodal({ content, modalclose }) {
                       value={formik.values.biography}
                     />
                   </div>
+
+                  {formik.getFieldMeta("biography").error&&formik.getFieldMeta("biography").touched&&(<span style={{color:"red"}}>{formik.getFieldMeta("biography").error}</span>)}
+                  
                 </div>
               </div>
               <div className="modal-footer">

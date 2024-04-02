@@ -3,11 +3,12 @@ import { useFormik } from 'formik'
 import React from 'react'
 import { useDispatch } from 'react-redux'
 import { addauthor} from "./reducer/bookauthorlist";
+import { useNavigate } from 'react-router-dom';
 
 function Createauthor() {
 
   const dispatch = useDispatch();
-
+  const navigate = useNavigate();
   const formik = useFormik({
         initialValues:{
             name:"",
@@ -15,9 +16,23 @@ function Createauthor() {
             biography:""
         },
         validate:(values)=>{
+          console.log(values)
             let error = {}
-            if(values.authorname==""){
-                error.authorname = "Please Enter AuthorName"
+            if(values.name.length==0){
+                error.name = "Please Enter AuthorName"
+            }
+            if(values.name.length<3){
+              error.name = "Enter Name greater than 3."
+            }
+
+            if(values.biography.length==0){
+              error.biography = "Enter Biography."
+            }
+            if(values.biography.length<3){
+              error.biography = "Enter biography greater than 3."
+            }
+            if(values.birthdate==0){
+              error.birthdate = "Enter the Date Of Birth."
             }
             return error
         },
@@ -41,7 +56,7 @@ function Createauthor() {
           avatar:createauthorapi.data.avatar
         })
       )
-
+        navigate("/allauthors")
       console.log(createauthorapi)
       } catch (error) {
         console.log(error)
@@ -70,6 +85,8 @@ function Createauthor() {
           />
         </div>
 
+        {formik.getFieldMeta("name").error&&formik.getFieldMeta("name").touched&&(<span style={{color:"red"}}>{formik.getFieldMeta("name").error}</span>)}
+
         <div className="mb-2">
           <label htmlFor="exampleInputEmail1" className="form-label">
             Birth Date
@@ -84,6 +101,8 @@ function Createauthor() {
             onChange={formik.handleChange}
           />
         </div>
+
+        {formik.getFieldMeta("birthdate").error&&formik.getFieldMeta("birthdate").touched&&(<span style={{color:"red"}}>{formik.getFieldMeta("birthdate").error}</span>)}
 
         <div className="mb-2">
           <label htmlFor="exampleInputPassword1" className="form-label">
@@ -100,7 +119,7 @@ function Createauthor() {
             onChange={formik.handleChange}
           />
         </div>
-
+        {formik.getFieldMeta("biography").error&&formik.getFieldMeta("biography").touched&&(<span style={{color:"red"}}>{formik.getFieldMeta("biography").error}</span>)}
 
         <div className="row ">
           <div className="col">
