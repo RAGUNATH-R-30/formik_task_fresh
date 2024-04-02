@@ -18,10 +18,10 @@ function BookCard({content}) {
   };
   return (
     <>
-    <div className="col-lg-12">
+    <div className="col-lg-12 col-md-6">
       <div className="card mb-3" style={{ maxWidth: "100%", }}>
         <div className="row g-0">
-          <div className="col-md-2">
+          <div className="col-lg-3 col-md-5 col-sm-5">
             <div
               style={{
                 height: 211,
@@ -38,7 +38,7 @@ function BookCard({content}) {
               />
             </div>
           </div>
-          <div className="col-md-10">
+          <div className="col-lg-9 col-md-7 col-sm-6">
             <div className="card-body">
               <div className="row d-flex justify-content-end ">
                 <div className="col-lg-12">
@@ -57,13 +57,31 @@ function BookCard({content}) {
                   {`ISBN Number: ${content.isbnnumber}`}
                 </small>
               </p>
-              <button type="button"
+              {/* <button type="button"
                 className="btn btn-outline-danger"
                 onClick={() => {
                   setdeletemodal(true);
                 }}
 
+                >Delete</button> */}
+
+          <div className="row">
+            <div className="col-lg-2 col-md-2 col-sm-2">
+            <button type="submit"
+                className="btn btn-primary"
+                style={{ backgroundColor: "#20236D", border: "none" }}onClick={()=>setshowmodal(true)}>Edit</button>
+            
+            </div>
+            <div className="col-lg-10 col-md-10 col-sm-10">
+            <button type="button"
+                className="btn btn-outline-danger ms-3"
+                onClick={() => {
+                  setdeletemodal(true);
+                }}
+
                 >Delete</button>
+            </div>
+          </div>
             </div>
           </div>
         </div>
