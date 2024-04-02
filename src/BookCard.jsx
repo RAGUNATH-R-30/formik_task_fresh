@@ -66,13 +66,10 @@ function BookCard({content}) {
                 >Delete</button> */}
 
           <div className="row">
-            <div className="col-lg-2 col-md-2 col-sm-2">
+            <div className="col">
             <button type="submit"
                 className="btn btn-primary"
                 style={{ backgroundColor: "#20236D", border: "none" }}onClick={()=>setshowmodal(true)}>Edit</button>
-            
-            </div>
-            <div className="col-lg-10 col-md-10 col-sm-10">
             <button type="button"
                 className="btn btn-outline-danger ms-3"
                 onClick={() => {
