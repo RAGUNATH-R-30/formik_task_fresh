@@ -26,8 +26,8 @@ function AuthorCard({ content }) {
   })
   return (
  
-    <div className="col-lg-4">
-      <div className="card mt-3" style={{ width: "18rem",  }}>
+    <div className="col-lg-3 col-md-4">
+      <div className="card mt-3 " style={{ width: 300,height:400  }}>
         <div className="card-body">
           <div className="row ">
             <div className="col ">

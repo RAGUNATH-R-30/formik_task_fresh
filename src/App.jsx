@@ -10,6 +10,7 @@ import Createauthor from "./Createauthor";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { setauthors, setbooks  } from "./reducer/bookauthorlist";
+import TopNavbar from "./TopNavbar";
 
 function App() {
 
@@ -53,11 +54,8 @@ function App() {
 
   return (
     <BrowserRouter>
+    <TopNavbar></TopNavbar>
     <div className="container-fluid">
-      <div className="row">
-        <div className="col-lg-3 ps-0">
-        <Sidebar></Sidebar>
-        </div>
         <Routes>
       <Route path="/" element={<Allbooks content={data.booklist}/>}></Route>
       <Route path="/allauthors" element={<Allauthors content={data.authorslist}/>}></Route>
@@ -65,7 +63,7 @@ function App() {
       <Route path="/createauthor" element={<Createauthor/>}></Route>
     </Routes>
       </div>
-    </div>
+    
 
 
     
